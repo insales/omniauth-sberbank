@@ -49,7 +49,8 @@ module OmniAuth
           first_name: raw_info['family_name'],
           last_name: raw_info['given_name'],
           middle_name: raw_info['middle_name'],
-          id: raw_info['sub']
+          id: raw_info['sub'],
+          client_host: full_host
         }
       end
 

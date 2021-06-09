@@ -50,7 +50,7 @@ module OmniAuth
           last_name: raw_info['given_name'],
           middle_name: raw_info['middle_name'],
           id: raw_info['sub'],
-          client_host: full_host
+          client_host: raw_info['state']
         }
       end
 
@@ -64,11 +64,13 @@ module OmniAuth
       def raw_info
         access_token.options[:mode] = :header
         @raw_info ||= begin
+          state = request.params['state']
           result = access_token.get('/ru/prod/sberbankid/v2.1/userinfo', headers: info_headers).parsed
           unless result['aud'] == options.client_id
             raise ArgumentError, "aud in Sber response not equal clien_id. aud = #{result['aud']}"
           end
 
+          result['state'] = state
           result
         end
       end
@@ -78,12 +80,13 @@ module OmniAuth
         super.tap do |params|
           %w[state scope response_type client_type client_id nonce].each do |v|
             next unless request.params[v]
+
             params[v.to_sym] = request.params[v]
           end
           params[:scope] ||= DEFAULT_SCOPE
-          security_state = SecureRandom.hex(16)
-          params[:state] = security_state
-          session['omniauth.state'] = security_state
+          # if you want redirect to other host and save old host
+          params[:state] = full_host
+          session['omniauth.state'] = full_host
           params[:nonce] = SecureRandom.hex(16)
         end
       end

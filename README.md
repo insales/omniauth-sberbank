@@ -79,6 +79,6 @@ Tested with the following Ruby versions:
 
 ## License
 
-Copyright: 2011-2021 Anton Maminov (anton.maminov@gmail.com)
+Copyright: 2021-2021 Sergei Baksheev (sergbaksheev825@gmail.com)
 
 This library is distributed under the MIT license. Please see the LICENSE file.

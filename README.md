@@ -32,7 +32,7 @@ provider :sberbank,
   grant_type: 'client_credentials'
 ```
 
-[See the example Rails app](https://github.com/Sergei825/omniauth-sberbank/blob/master/examples).
+[See the example Rails app](https://github.com/insales/omniauth-sberbank/blob/master/examples).
 
 ## Configuring
 

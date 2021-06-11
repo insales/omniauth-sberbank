@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ['Sergei Baksheev']
   gem.email         = ['sergbaksheev825@gmail.com']
   gem.summary       = 'Sberbank OAuth2 Strategy for OmniAuth'
-  gem.homepage      = 'https://github.com/Sergei825/omniauth-sberbank'
+  gem.homepage      = 'https://github.com/insales/omniauth-sberbank'
   gem.licenses      = ['MIT']
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }

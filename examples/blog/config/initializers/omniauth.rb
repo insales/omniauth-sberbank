@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require 'pry'
 
 OmniAuth.config.logger = Rails.logger
 OmniAuth.config.add_camelization 'mailru', 'MailRu'

@@ -51,7 +51,7 @@ module OmniAuth
           middle_name: raw_info['middle_name'],
           id: raw_info['sub'],
           client_host: raw_info['state'],
-          provider: 'sberbank'
+          provider: options.name
         }
       end
 

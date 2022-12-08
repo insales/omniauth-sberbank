@@ -31,7 +31,7 @@ module OmniAuth
 
       option :client_options,
              site: 'https://api.sberbank.ru',
-             token_url: 'https://api.sberbank.ru/ru/prod/tokens/v2/oidc',
+             token_url: 'https://api.sberbank.ru/prod/tokens/v3/oidc',
              authorize_url: 'https://online.sberbank.ru/CSAFront/oidc/authorize.do'
 
       option :authorize_options, %i[scope response_type client_type client_id state nonce]
@@ -66,7 +66,7 @@ module OmniAuth
         access_token.options[:mode] = :header
         @raw_info ||= begin
           state = request.params['state']
-          result = access_token.get('/ru/prod/sberbankid/v2.1/userinfo', headers: info_headers).parsed
+          result = access_token.get('/prod/sberbankid/userinfo/v5/', headers: info_headers).parsed
           unless result['aud'] == options.client_id
             raise ArgumentError, "aud in Sber response not equal clien_id. aud = #{result['aud']}"
           end

@@ -85,10 +85,6 @@ module OmniAuth
             params[v.to_sym] = request.params[v]
           end
           params[:scope] ||= DEFAULT_SCOPE
-          # if you want redirect to other host and save old host
-          state = session['omniauth.origin'] || env['HTTP_REFERER']
-          params[:state] = state
-          session['omniauth.state'] = state
           params[:nonce] = SecureRandom.hex(16)
         end
       end

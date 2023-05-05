@@ -30,8 +30,8 @@ module OmniAuth
       option :name, 'sberbank'
 
       option :client_options,
-             site: 'https://api.sberbank.ru',
-             token_url: 'https://api.sberbank.ru/prod/tokens/v3/oidc',
+             site: 'https://mc.api.sberbank.ru',
+             token_url: 'https://mc.api.sberbank.ru/prod/tokens/v3/oidc',
              authorize_url: 'https://online.sberbank.ru/CSAFront/oidc/authorize.do'
 
       option :authorize_options, %i[scope response_type client_type client_id state nonce]

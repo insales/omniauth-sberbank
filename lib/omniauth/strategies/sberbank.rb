@@ -8,7 +8,7 @@ module OmniAuth
     # Authenticate to Sberbank utilizing OAuth 2.0 and retrieve
     # basic user information.
     # documentation available here:
-    # https://developer.sberbank.ru/doc/v1/sberbank-id/info
+    # https://developers.sber.ru/docs/ru/sberid/faq/a4-switching-to-cloud
     #
     # provider :sberbank,
     # client_id: '11111111-1111-1111-1111-1111111111111111',
@@ -30,9 +30,9 @@ module OmniAuth
       option :name, 'sberbank'
 
       option :client_options,
-             site: 'https://mc.api.sberbank.ru',
-             token_url: 'https://mc.api.sberbank.ru/prod/tokens/v3/oidc',
-             authorize_url: 'https://online.sberbank.ru/CSAFront/oidc/authorize.do'
+             site: 'https://oauth.sber.ru',
+             token_url: 'https://oauth.sber.ru/ru/prod/tokens/v2/oidc',
+             authorize_url: 'https://id.sber.ru/CSAFront/oidc/authorize.do'
 
       option :authorize_options, %i[scope response_type client_type client_id state nonce]
 
@@ -66,7 +66,7 @@ module OmniAuth
         access_token.options[:mode] = :header
         @raw_info ||= begin
           state = request.params['state']
-          result = access_token.get('/prod/sberbankid/userinfo/v5/', headers: info_headers).parsed
+          result = access_token.get('ru/prod/sberbankid/v2.1/userinfo', headers: info_headers).parsed
           unless result['aud'] == options.client_id
             raise ArgumentError, "aud in Sber response not equal clien_id. aud = #{result['aud']}"
           end

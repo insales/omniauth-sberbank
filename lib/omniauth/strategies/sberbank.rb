@@ -66,7 +66,7 @@ module OmniAuth
         access_token.options[:mode] = :header
         @raw_info ||= begin
           state = request.params['state']
-          result = access_token.get('ru/prod/sberbankid/v2.1/userinfo', headers: info_headers).parsed
+          result = access_token.get('/ru/prod/sberbankid/v2.1/userinfo', headers: info_headers).parsed
           unless result['aud'] == options.client_id
             raise ArgumentError, "aud in Sber response not equal clien_id. aud = #{result['aud']}"
           end

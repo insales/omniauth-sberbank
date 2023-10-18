@@ -50,6 +50,8 @@ module OmniAuth
           last_name: raw_info['given_name'],
           middle_name: raw_info['middle_name'],
           id: raw_info['sub'],
+          inn: raw_info['inn'],
+          rquid: rquid, # для сообщения Сберу об успешной авторизации
           client_host: raw_info['state'],
           provider: options.name
         }

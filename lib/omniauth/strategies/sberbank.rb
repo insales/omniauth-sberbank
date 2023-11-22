@@ -53,7 +53,11 @@ module OmniAuth
           inn: raw_info['inn'],
           rquid: rquid, # для сообщения Сберу об успешной авторизации
           client_host: raw_info['state'],
-          provider: options.name
+          provider: options.name,
+          birthdate: raw_info['birthdate'],
+          gender: raw_info['gender'],
+          is_self_employed: raw_info['is_self_employed'],
+          verified: raw_info['verified']
         }
       end
 

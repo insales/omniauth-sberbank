@@ -15,6 +15,6 @@ Gem::Specification.new do |gem|
   gem.name          = 'omniauth-sberbank'
   gem.require_paths = ['lib']
   gem.version       = OmniAuth::Sberbank::VERSION
-  gem.required_ruby_version = '>= 2.6.0'
-  gem.add_runtime_dependency 'omniauth-oauth2', ['>= 1.5', '<= 1.7.1']
+  gem.required_ruby_version = '>= 2.7.0'
+  gem.add_runtime_dependency 'omniauth-oauth2', ['>= 1.5', '<= 1.8.0']
 end

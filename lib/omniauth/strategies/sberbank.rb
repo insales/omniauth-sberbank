@@ -57,7 +57,8 @@ module OmniAuth
           birthdate: raw_info['birthdate'],
           gender: raw_info['gender'],
           is_self_employed: raw_info['is_self_employed'],
-          verified: raw_info['verified']
+          verified: raw_info['verified'],
+          shipping_addresses_nm: raw_info['shipping_addresses_nm']
         }
       end
 

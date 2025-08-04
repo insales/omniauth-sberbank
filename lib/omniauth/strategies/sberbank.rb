@@ -2,6 +2,7 @@
 
 require 'omniauth/strategies/oauth2'
 require 'securerandom'
+require 'json'
 
 module OmniAuth
   module Strategies
@@ -73,14 +74,13 @@ module OmniAuth
         access_token.options[:mode] = :header
         @raw_info ||= begin
           state = request.params['state']
-          nonce = request.params['nonce']
           result = access_token.get('/ru/prod/sberbankid/v2.1/userinfo', headers: info_headers).parsed
           unless result['aud'] == options.client_id
             raise ArgumentError, "aud in Sber response not equal clien_id. aud = #{result['aud']}"
           end
 
           result['state'] = state
-          result['nonce'] = nonce
+          result['nonce'] = parse_nonce_from_id_token(access_token['id_token'])
           result
         end
       end
@@ -105,6 +105,14 @@ module OmniAuth
       end
 
       private
+
+      def parse_nonce_from_id_token(id_token)
+        return if id_token.nil?
+
+        decoded = Base64.decode64(id_token.split('.')[1])
+        data = JSON.load(decoded)
+        data['nonce']
+      end
 
       def params
         {

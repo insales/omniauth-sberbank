@@ -2,6 +2,7 @@
 
 require 'omniauth/strategies/oauth2'
 require 'securerandom'
+require 'json'
 
 module OmniAuth
   module Strategies
@@ -79,6 +80,7 @@ module OmniAuth
           end
 
           result['state'] = state
+          result['nonce'] = parse_nonce_from_id_token(access_token['id_token'])
           result
         end
       end
@@ -103,6 +105,14 @@ module OmniAuth
       end
 
       private
+
+      def parse_nonce_from_id_token(id_token)
+        return if id_token.nil?
+
+        decoded = Base64.decode64(id_token.split('.')[1])
+        data = JSON.load(decoded)
+        data['nonce']
+      end
 
       def params
         {

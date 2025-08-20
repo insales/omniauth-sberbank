@@ -54,6 +54,7 @@ module OmniAuth
           rquid: rquid, # для сообщения Сберу об успешной авторизации
           client_host: raw_info['state'],
           provider: options.name,
+          internal_user_id: internal_user_id,
           birthdate: raw_info['birthdate'],
           gender: raw_info['gender'],
           is_self_employed: raw_info['is_self_employed'],
@@ -201,6 +202,20 @@ module OmniAuth
           'accept' => 'application/json',
           'Authorization' => "Bearer #{access_token.token}"
         }
+      end
+
+      def internal_user_id
+        jwt_token = access_token['id_token']
+        base64_encoded_payload = jwt_token.to_s.split(".")[1]
+
+        return unless base64_encoded_payload
+
+        json_payload = Base64.decode64(base64_encoded_payload)
+        payload = JSON.parse(json_payload)
+
+        payload['uuid']
+      rescue JSON::ParserError 
+        nil
       end
 
       def rquid

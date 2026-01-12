@@ -94,7 +94,7 @@ module OmniAuth
             params[v.to_sym] = request.params[v]
           end
           params[:scope] ||= DEFAULT_SCOPE
-          params[:nonce] = SecureRandom.hex(16)
+          params[:nonce] ||= SecureRandom.hex(16)
         end
       end
 
